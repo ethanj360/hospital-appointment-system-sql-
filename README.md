@@ -11,8 +11,7 @@ The system is designed as an internal tool used by hospital staff to manage pati
 
 The database design prioritizes data integrity, normalization, and scalability while supporting real-world hospital workflows and administrative needs.
 
-The complete system proposal and documentation can be viewed in:  
-**Gee-1 Appointment System Project.pdf**
+The complete system proposal and documentation can be viewed here: [Gee-1 Appointment System Project](Gee-1 Appointment System Project.pdf)
 
 ---
 
