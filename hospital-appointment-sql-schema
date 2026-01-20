@@ -1,0 +1,156 @@
+/* Hospital Appointment System SQL */
+
+CREATE TABLE EMPLOYEE(
+EmployeeID Char(5) NOT NULL,
+FName Char(15) NOT NULL,
+LName Char(15) NOT NULL,
+SystemUsername Char(20) NOT NULL,
+Phone BigInt NOT NULL,
+Email Char(40) NOT NULL,
+CONSTRAINT EMPLOYEE_PK PRIMARY KEY(EmployeeID)
+);
+
+CREATE TABLE PATIENT(
+PatientID Char(5) NOT NULL,
+FName Char(15) NOT NULL,
+LName Char(15) NOT NULL,
+Address Char(50) NOT NULL,
+City Char(20) NOT NULL,
+State Char(2) NOT NULL,
+Zip Int NOT NULL,
+Phone BigInt NOT NULL,
+Email Char(40) NOT NULL,
+DOB Date NOT NULL,
+Gender Char(1) NOT NULL,
+CONSTRAINT PATIENT_PK PRIMARY KEY(PatientID)
+);
+
+CREATE TABLE DOCTOR(
+DoctorID Char(5) NOT NULL,
+FName Char(15) NOT NULL,
+LName Char(15) NOT NULL,
+Specialty Char(25) NOT NULL,
+Phone BigInt NOT NULL,
+Email Char(40) NOT NULL,
+CONSTRAINT DOCTOR_PK PRIMARY KEY(DoctorID)
+);
+
+CREATE TABLE APPOINTMENT(
+AppointmentID Char(8) NOT NULL,
+AppointmentDate Date NOT NULL,
+AppointmentTime Time NOT NULL,
+Status Char(15) NOT NULL,
+ReasonForVisit Char(50) NOT NULL,
+PatientID Char(5) NOT NULL,
+DoctorID Char(5) NOT NULL,
+EmployeeID Char(5) NOT NULL,
+CONSTRAINT APPOINTMENT_PK PRIMARY KEY(AppointmentID),
+CONSTRAINT APPOINTMENT_PATIENT_FK FOREIGN KEY(PatientID) REFERENCES PATIENT(PatientID),
+CONSTRAINT APPOINTMENT_DOCTOR_FK FOREIGN KEY(DoctorID) REFERENCES DOCTOR(DoctorID),
+CONSTRAINT APPOINTMENT_EMPLOYEE_FK FOREIGN KEY(EmployeeID) REFERENCES EMPLOYEE(EmployeeID)
+);
+
+CREATE TABLE PAYMENT(
+PaymentID Char(8) NOT NULL,
+PaymentDate Date NOT NULL,
+Amount Float NOT NULL,
+Discount Float NOT NULL,
+TotalCharge Float NOT NULL,
+PatientID Char(5) NOT NULL,
+AppointmentID Char(8) NOT NULL,
+CONSTRAINT PAYMENT_PK PRIMARY KEY(PaymentID),
+CONSTRAINT PAYMENT_PATIENT_FK FOREIGN KEY(PatientID) REFERENCES PATIENT(PatientID),
+CONSTRAINT PAYMENT_APPOINTMENT_FK FOREIGN KEY(AppointmentID) REFERENCES APPOINTMENT(AppointmentID)
+);
+
+CREATE TABLE MEDICAL_RECORD(
+RecordID Char(8) NOT NULL,
+Diagnosis Char(50) NOT NULL,
+Treatment Char(50) NOT NULL,
+AppointmentID Char(8) NOT NULL,
+CONSTRAINT MEDICAL_RECORD_PK PRIMARY KEY(RecordID),
+CONSTRAINT MEDICAL_RECORD_APPOINTMENT_FK FOREIGN KEY(AppointmentID) REFERENCES APPOINTMENT(AppointmentID)
+);
+
+
+/* Mock Data (10 rows each) */
+
+INSERT INTO EMPLOYEE VALUES('EM001','John','Doe','jdoe',5551234,'jdoe@email.com');
+INSERT INTO EMPLOYEE VALUES('EM002','Jane','Smith','jsmith',5555678,'jsmith@email.com');
+INSERT INTO EMPLOYEE VALUES('EM003','Bob','Johnson','bjohnson',5559012,'bjohnson@email.com');
+INSERT INTO EMPLOYEE VALUES('EM004','Sarah','Lee','slee',5553456,'slee@email.com');
+INSERT INTO EMPLOYEE VALUES('EM005','David','Kim','dkim',5557890,'dkim@email.com');
+INSERT INTO EMPLOYEE VALUES('EM006','Linda','Chen','lchen',5552345,'lchen@email.com');
+INSERT INTO EMPLOYEE VALUES('EM007','Tom','Davis','tdavis',5556789,'tdavis@email.com');
+INSERT INTO EMPLOYEE VALUES('EM008','Cathy','Nguyen','cnguyen',5550123,'cnguyen@email.com');
+INSERT INTO EMPLOYEE VALUES('EM009','Mike','Jones','mjones',5554567,'mjones@email.com');
+INSERT INTO EMPLOYEE VALUES('EM010','Emily','Brown','ebrown',5558901,'ebrown@email.com');
+
+
+INSERT INTO PATIENT VALUES('PT001','Michael','Jackson','123 Main St','Walnut','CA',91789,9385764756,'mjackson@gmail.com','1977-05-05','M');
+INSERT INTO PATIENT VALUES('PT002','Stephen','Curry','456 Oak Ave','Diamond Bar','CA',91765,8474857685,'scurry@gmail.com','1991-11-07','M');
+INSERT INTO PATIENT VALUES('PT003','Chris','Pratt','789 Pine Blvd','Brea','CA',92821,8576857364,'cpratt@gmail.com','1989-08-06','M');
+INSERT INTO PATIENT VALUES('PT004','Lebron','James','321 Elm Rd','Irvine','CA',92618,9483674857,'lebronj@yahoo.com','1990-11-05','M');
+INSERT INTO PATIENT VALUES('PT005','Kobe','Bryant','654 Cedar Ln','Long Beach','CA',90802,9058375648,'kbryant@gmail.com','1973-02-23','M');
+INSERT INTO PATIENT VALUES('PT006','Jesse','Ramirez','987 Birch Ave','Pomona','CA',91766,9514637471,'jramirez@gmail.com','2008-05-15','M');
+INSERT INTO PATIENT VALUES('PT007','Alethea','Gani','246 Maple St','Rowland','CA',91748,9096847586,'gani@example.com','2002-05-20','F');
+INSERT INTO PATIENT VALUES('PT008','Yemerick','Lumis','369 Oakwood Dr','Upland','CA',91786,9683760402,'ylumis@gmail.com','1981-10-15','M');
+INSERT INTO PATIENT VALUES('PT009','Rose','Lee','753 Magnolia Blvd','Costa Mesa','CA',92626,9584716897,'rlee@hotmail.com','1995-05-11','F');
+INSERT INTO PATIENT VALUES('PT010','Michael','Reaves','159 Pine Ln','Industry','CA',91744,9557364857,'mreaves@yahoo.com','1990-05-09','M');
+
+
+INSERT INTO DOCTOR VALUES('DR001','Phil','Reed','Pediatrics',9685720694,'philreed@gmail.com');
+INSERT INTO DOCTOR VALUES('DR002','Kim','Park','Pediatrics',5558375839,'drkim@gmail.com');
+INSERT INTO DOCTOR VALUES('DR003','Peta','Hellen','Gastroenterology',4857384069,'petahell@yahoo.com');
+INSERT INTO DOCTOR VALUES('DR004','Christine','Jones','Dermatology',9132457698,'christinej@gmail.com');
+INSERT INTO DOCTOR VALUES('DR005','Steve','Jones','Orthopedics',9684958345,'sjones@yahoo.com');
+INSERT INTO DOCTOR VALUES('DR006','Jacob','Nguyen','Neurology',6857390596,'jnguyen@gmail.com');
+INSERT INTO DOCTOR VALUES('DR007','Dwight','Howard','Cardiology',5551234345,'dhoward@gmail.com');
+INSERT INTO DOCTOR VALUES('DR008','Phil','Paul','Urology',7564738276,'ppaul@gmail.com');
+INSERT INTO DOCTOR VALUES('DR009','Jackson','Stone','Urology',5554567,'drjackson@email.com');
+INSERT INTO DOCTOR VALUES('DR010','Anderson','Wells','Gastroenterology',5558901,'dranderson@email.com');
+
+
+INSERT INTO APPOINTMENT VALUES('APPT0001','2023-05-27','10:00:00','Scheduled','Ear infection','PT001','DR005','EM001');
+INSERT INTO APPOINTMENT VALUES('APPT0002','2023-05-25','14:30:00','Completed','Vaccination','PT003','DR002','EM002');
+INSERT INTO APPOINTMENT VALUES('APPT0003','2023-05-03','09:45:00','Scheduled','Skin rash','PT003','DR003','EM003');
+INSERT INTO APPOINTMENT VALUES('APPT0004','2023-05-04','11:15:00','Canceled','Eye exam','PT004','DR004','EM004');
+INSERT INTO APPOINTMENT VALUES('APPT0005','2023-05-05','16:00:00','Scheduled','Knee pain','PT005','DR005','EM005');
+INSERT INTO APPOINTMENT VALUES('APPT0006','2023-05-06','13:30:00','Completed','Prenatal visit','PT006','DR006','EM006');
+INSERT INTO APPOINTMENT VALUES('APPT0007','2023-05-07','10:30:00','Scheduled','Anxiety eval','PT007','DR007','EM007');
+INSERT INTO APPOINTMENT VALUES('APPT0008','2023-05-08','15:45:00','Scheduled','Migraine','PT008','DR008','EM008');
+INSERT INTO APPOINTMENT VALUES('APPT0009','2023-05-09','12:15:00','Scheduled','UTI','PT009','DR009','EM009');
+INSERT INTO APPOINTMENT VALUES('APPT0010','2023-05-10','11:00:00','Scheduled','Digestive issues','PT010','DR010','EM010');
+
+
+INSERT INTO PAYMENT VALUES('PAY00001','2023-05-01','100.00','10.00','90.00','PT001','APPT0001');
+INSERT INTO PAYMENT VALUES('PAY00002','2023-05-02','50.00','5.00','45.00','PT002','APPT0002');
+INSERT INTO PAYMENT VALUES('PAY00003','2023-05-03','75.00','0.00','75.00','PT003','APPT0003');
+INSERT INTO PAYMENT VALUES('PAY00004','2023-05-04','200.00','20.00','180.00','PT004','APPT0004');
+INSERT INTO PAYMENT VALUES('PAY00005','2023-05-05','150.00','15.00','135.00','PT005','APPT0005');
+INSERT INTO PAYMENT VALUES('PAY00006','2023-05-06','80.00','8.00','72.00','PT006','APPT0006');
+INSERT INTO PAYMENT VALUES('PAY00007','2023-05-07','120.00','12.00','108.00','PT007','APPT0007');
+INSERT INTO PAYMENT VALUES('PAY00008','2023-05-08','90.00','0.00','90.00','PT008','APPT0008');
+INSERT INTO PAYMENT VALUES('PAY00009','2023-05-09','60.00','6.00','54.00','PT009','APPT0009');
+INSERT INTO PAYMENT VALUES('PAY00010','2023-05-10','175.00','17.50','157.50','PT010','APPT0010');
+
+
+INSERT INTO MEDICAL_RECORD VALUES('MR000001','Headache','Prescribed painkillers','APPT0001');
+INSERT INTO MEDICAL_RECORD VALUES('MR000002','Influenza','Rest and fluids','APPT0002');
+INSERT INTO MEDICAL_RECORD VALUES('MR000003','Allergic reaction','Antihistamines','APPT0003');
+INSERT INTO MEDICAL_RECORD VALUES('MR000004','Conjunctivitis','Eye drops','APPT0004');
+INSERT INTO MEDICAL_RECORD VALUES('MR000005','Sprained ankle','Rest and ice','APPT0005');
+INSERT INTO MEDICAL_RECORD VALUES('MR000006','Pregnancy checkup','Prenatal vitamins','APPT0006');
+INSERT INTO MEDICAL_RECORD VALUES('MR000007','Anxiety','Recommended therapy','APPT0007');
+INSERT INTO MEDICAL_RECORD VALUES('MR000008','Migraine','Migraine medication','APPT0008');
+INSERT INTO MEDICAL_RECORD VALUES('MR000009','Urinary tract infection','Prescribed antibiotics','APPT0009');
+INSERT INTO MEDICAL_RECORD VALUES('MR000010','Digestive issues','Dietary changes','APPT0010');
+
+
+/* View all tables */
+Select * From EMPLOYEE;
+Select * From PATIENT;
+Select * From DOCTOR;
+Select * From APPOINTMENT;
+Select * From PAYMENT;
+Select * From MEDICAL_RECORD;
