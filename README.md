@@ -68,17 +68,17 @@ Each use case includes defined actors, triggers, preconditions, postconditions, 
 **Context-Level DFD**  
 Shows system boundaries and external interactions.
 
-![Context Level DFD](dfd-context-hospital.png)
+![Context Level DFD](dfds/dfd-context-hospital.png)
 
 **Level 0 DFD**  
 Illustrates the primary processes of the hospital appointment system.
 
-![Level 0 DFD](dfd-level-0.png)
+![Level 0 DFD](dfds/dfd-level-0.png)
 
 **Level 1 DFD – Authentication**  
 Details the authentication workflow for system access.
 
-![Level 1 Authentication DFD](dfd-level-1-authenticate-system-access.png)
+![Level 1 Authentication DFD](dfds/dfd-level-1-authenticate-system-access.png)
 
 ---
 
@@ -87,12 +87,12 @@ Details the authentication workflow for system access.
 **Logical ERD**  
 Models relationships between patients, doctors, appointments, payments, and medical records.
 
-![Logical ERD](erd-hospital-system.png)
+![Logical ERD](erds/erd-hospital-system.png)
 
 **Physical ERD**  
 Displays table structures, attributes, and primary/foreign key constraints.
 
-![Physical ERD](physical-erd-hospital-system.png)
+![Physical ERD](erds/physical-erd-hospital-system.png)
 
 ---
 
@@ -117,11 +117,11 @@ Although the focus of this project is backend and database design, UI mockups we
 
 **Home Page Prototype**
 
-![Home Page UI](ui-home-page-gee1.png)
+![Home Page UI](ui-examples/ui-home-page-gee1.png)
 
 **Book Appointment Screen**
 
-![Book Appointment UI](ui-book-appointment.png)
+![Book Appointment UI](ui-examples/ui-book-appointment.png)
 
 ---
 
